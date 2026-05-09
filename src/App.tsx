@@ -11,6 +11,7 @@ import gameTheme from './theme.json';
 // --- Constants & Types ---
 const PROJECTILE_SPEED = 8;
 const MAX_LIVES = 3;
+const PUBLIC_BASE_URL = import.meta.env.BASE_URL || '/';
 
 type GameState = 'START' | 'PLAYING' | 'LEVEL_UP' | 'GAMEOVER';
 
@@ -79,19 +80,25 @@ class SpriteManager {
   private backgroundImg: HTMLImageElement | null = null;
   private witchImg: HTMLImageElement | null = null;
   private pixelSize = 1.5;
+  private assetBaseUrl: string;
 
-  constructor() {
+  constructor(baseUrl: string) {
+    this.assetBaseUrl = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
     this.initSprites();
   }
 
   private resolveAssetPath(asset: string) {
-    if (/^(https?:|data:)/.test(asset) || asset.startsWith('/')) {
+    if (/^(https?:|data:)/.test(asset)) {
       return asset;
     }
-    if (asset.startsWith('images/')) {
-      return `/${asset}`;
+
+    const normalizedAsset = asset.replace(/^\/+/, '');
+
+    if (normalizedAsset.startsWith('images/')) {
+      return `${this.assetBaseUrl}${normalizedAsset}`;
     }
-    return `/images/${asset}`;
+
+    return `${this.assetBaseUrl}images/${normalizedAsset}`;
   }
 
   loadLevelAssets(level: LevelConfig) {
@@ -306,7 +313,7 @@ class SpriteManager {
   }
 }
 
-const spriteManager = new SpriteManager();
+const spriteManager = new SpriteManager(PUBLIC_BASE_URL);
 
 // --- Main Component ---
 export default function App() {
