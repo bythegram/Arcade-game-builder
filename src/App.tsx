@@ -579,6 +579,11 @@ export default function App() {
       });
       g.enemies = g.enemies.filter(en => en.x + en.width > 0);
 
+      // If boss was active but scrolled off-screen without being defeated, reset so enemies resume
+      if (g.bossActive && !g.enemies.some(en => en.type === 'boss')) {
+        g.bossActive = false;
+      }
+
       g.projectiles.forEach((p, i) => {
         p.x += p.speed;
         // Collision with enemies
