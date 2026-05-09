@@ -1,0 +1,94 @@
+{
+  "levels": [
+    {
+      "id": 1,
+      "name": "Emerald Highlands",
+      "threshold": 0,
+      "assets": {
+        "player": "/images/dragon-sprite.png",
+        "enemy": "/images/witch.png",
+        "background": "/images/background-img.png",
+        "projectile": "#fbbf24"
+      },
+      "ui": {
+        "title": "DRAGON STRIKE",
+        "subtitle": "LEVEL 1: EMERALD HIGHLANDS",
+        "hudText": "text-yellow-400"
+      },
+      "balance": {
+        "player": { "gravity": 0.5, "lift": -10 },
+        "enemy": { "width": 140, "height": 168, "spawnRate": 90 },
+        "scrollSpeed": 4,
+        "boss": {
+          "hp": 10,
+          "width": 280,
+          "height": 336,
+          "spawnThreshold": 800,
+          "slowFactor": 0.5
+        }
+      }
+    },
+    {
+      "id": 2,
+      "name": "Shadow Realm",
+      "threshold": 1000,
+      "assets": {
+        "player": "/images/dragon-sprite.png",
+        "enemy": "/images/witch.png",
+        "background": "/images/background-img.png",
+        "projectile": "#ef4444"
+      },
+      "ui": {
+        "title": "DRAGON STRIKE",
+        "subtitle": "LEVEL 2: SHADOW REALM",
+        "hudText": "text-red-500"
+      },
+      "balance": {
+        "player": { "gravity": 0.6, "lift": -12 },
+        "enemy": { "width": 140, "height": 168, "spawnRate": 70 },
+        "scrollSpeed": 6,
+        "boss": {
+          "hp": 20,
+          "width": 300,
+          "height": 360,
+          "spawnThreshold": 2200,
+          "slowFactor": 0.4
+        }
+      }
+    },
+    {
+      "id": 3,
+      "name": "The Abyss",
+      "threshold": 2500,
+      "assets": {
+        "player": "/images/dragon-sprite.png",
+        "enemy": "/images/witch.png",
+        "background": "/images/background-img.png",
+        "projectile": "#ffffff"
+      },
+      "ui": {
+        "title": "DRAGON STRIKE",
+        "subtitle": "LEVEL 3: THE ABYSS",
+        "hudText": "text-blue-400"
+      },
+      "balance": {
+        "player": { "gravity": 0.7, "lift": -14 },
+        "enemy": { "width": 140, "height": 168, "spawnRate": 50 },
+        "scrollSpeed": 8,
+        "boss": {
+          "hp": 40,
+          "width": 350,
+          "height": 420,
+          "spawnThreshold": 5000,
+          "slowFactor": 0.3
+        }
+      }
+    }
+  ],
+  "common": {
+    "player": { "width": 144, "height": 90 },
+    "hudGradient": "bg-transparent",
+    "hudBorder": "border-transparent",
+    "instructions": "CLICK TO FLY & SHOOT"
+  }
+}

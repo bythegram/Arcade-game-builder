@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@layer base {
+  canvas {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+
+  .image-pixelated {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+}
