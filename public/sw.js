@@ -67,7 +67,10 @@ self.addEventListener('fetch', (event) => {
           if (event.request.mode === 'navigate') {
             return caches.match('./index.html');
           }
-          console.error('Failed to fetch non-navigation resource:', event.request.url, error);
+          console.error(
+            `Failed to fetch non-navigation resource: ${event.request.method} ${event.request.url}. Not available in cache.`,
+            error,
+          );
           throw error;
         });
     }),
