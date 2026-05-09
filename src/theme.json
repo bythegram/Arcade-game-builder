@@ -5,9 +5,9 @@
       "name": "Emerald Highlands",
       "threshold": 0,
       "assets": {
-        "player": "./images/dragon-sprite.png",
-        "enemy": "./images/witch.png",
-        "background": "./images/background-img.png",
+        "player": "dragon-sprite.png",
+        "enemy": "witch.png",
+        "background": "background-img.png",
         "projectile": "#fbbf24"
       },
       "ui": {
@@ -33,9 +33,9 @@
       "name": "Shadow Realm",
       "threshold": 1000,
       "assets": {
-        "player": "./images/dragon-sprite.png",
-        "enemy": "./images/witch.png",
-        "background": "./images/background-img.png",
+        "player": "dragon-sprite.png",
+        "enemy": "witch.png",
+        "background": "background-img.png",
         "projectile": "#ef4444"
       },
       "ui": {
@@ -61,9 +61,9 @@
       "name": "The Abyss",
       "threshold": 2500,
       "assets": {
-        "player": "./images/dragon-sprite.png",
-        "enemy": "./images/witch.png",
-        "background": "./images/background-img.png",
+        "player": "dragon-sprite.png",
+        "enemy": "witch.png",
+        "background": "background-img.png",
         "projectile": "#ffffff"
       },
       "ui": {

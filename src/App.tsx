@@ -8,6 +8,17 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Flame, RefreshCw, Trophy, Heart } from 'lucide-react';
 import gameTheme from './theme.json';
 
+// --- Assets ---
+import dragonSprite from './assets/dragon-sprite.png';
+import witchSprite from './assets/witch.png';
+import backgroundImg from './assets/background-img.png';
+
+const ASSET_MAP: Record<string, string> = {
+  'dragon-sprite.png': dragonSprite,
+  'witch.png': witchSprite,
+  'background-img.png': backgroundImg,
+};
+
 // --- Constants & Types ---
 const PROJECTILE_SPEED = 8;
 const MAX_LIVES = 3;
@@ -85,32 +96,37 @@ class SpriteManager {
   }
 
   loadLevelAssets(level: LevelConfig) {
+    // Resolve asset URLs from map
+    const playerSrc = ASSET_MAP[level.assets.player] || level.assets.player;
+    const bgSrc = ASSET_MAP[level.assets.background] || level.assets.background;
+    const enemySrc = ASSET_MAP[level.assets.enemy] || level.assets.enemy;
+
     // Load Player Sprite/Spritesheet
     const img = new Image();
     img.onload = () => { this.dragonSheet = img; };
     img.onerror = (e) => {
-      console.warn("Failed to load player asset:", level.assets.player, e);
+      console.warn("Failed to load player asset:", playerSrc, e);
       this.dragonSheet = null;
     };
-    img.src = level.assets.player;
+    img.src = playerSrc;
 
     // Load Background
     const bg = new Image();
     bg.onload = () => { this.backgroundImg = bg; };
     bg.onerror = (e) => {
-      console.warn("Failed to load background asset:", level.assets.background, e);
+      console.warn("Failed to load background asset:", bgSrc, e);
       this.backgroundImg = null;
     };
-    bg.src = level.assets.background;
+    bg.src = bgSrc;
 
     // Load Enemy
     const enemy = new Image();
     enemy.onload = () => { this.witchImg = enemy; };
     enemy.onerror = (e) => {
-      console.warn("Failed to load enemy asset:", level.assets.enemy, e);
+      console.warn("Failed to load enemy asset:", enemySrc, e);
       this.witchImg = null;
     };
-    enemy.src = level.assets.enemy;
+    enemy.src = enemySrc;
   }
 
   private initSprites() {
