@@ -26,11 +26,15 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))),
-    ),
+    caches
+      .keys()
+      .then((keys) =>
+        Promise.all([
+          ...keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)),
+          self.clients.claim(),
+        ]),
+      ),
   );
-  self.clients.claim();
 });
 
 self.addEventListener('fetch', (event) => {
@@ -59,7 +63,12 @@ self.addEventListener('fetch', (event) => {
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseToCache));
           return networkResponse;
         })
-        .catch(() => caches.match('./index.html'));
+        .catch((error) => {
+          if (event.request.mode === 'navigate') {
+            return caches.match('./index.html');
+          }
+          throw error;
+        });
     }),
   );
 });
