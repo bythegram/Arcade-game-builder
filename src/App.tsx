@@ -87,27 +87,30 @@ class SpriteManager {
   loadLevelAssets(level: LevelConfig) {
     // Load Player Sprite/Spritesheet
     const img = new Image();
-    img.src = level.assets.player;
-    img.crossOrigin = "anonymous";
     img.onload = () => { this.dragonSheet = img; };
-    img.onerror = () => {
-      console.warn("Failed to load player asset, using procedural fallback.");
+    img.onerror = (e) => {
+      console.warn("Failed to load player asset:", level.assets.player, e);
       this.dragonSheet = null;
     };
+    img.src = level.assets.player;
 
     // Load Background
     const bg = new Image();
-    bg.src = level.assets.background;
-    bg.crossOrigin = "anonymous";
     bg.onload = () => { this.backgroundImg = bg; };
-    bg.onerror = () => { this.backgroundImg = null; };
+    bg.onerror = (e) => {
+      console.warn("Failed to load background asset:", level.assets.background, e);
+      this.backgroundImg = null;
+    };
+    bg.src = level.assets.background;
 
     // Load Enemy
     const enemy = new Image();
-    enemy.src = level.assets.enemy;
-    enemy.crossOrigin = "anonymous";
     enemy.onload = () => { this.witchImg = enemy; };
-    enemy.onerror = () => { this.witchImg = null; };
+    enemy.onerror = (e) => {
+      console.warn("Failed to load enemy asset:", level.assets.enemy, e);
+      this.witchImg = null;
+    };
+    enemy.src = level.assets.enemy;
   }
 
   private initSprites() {
