@@ -8,17 +8,6 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Flame, RefreshCw, Trophy, Heart } from 'lucide-react';
 import gameTheme from './theme.json';
 
-// --- Assets ---
-import dragonSprite from './assets/dragon-sprite.png';
-import witchSprite from './assets/witch.png';
-import backgroundImg from './assets/background-img.png';
-
-const ASSET_MAP: Record<string, string> = {
-  'dragon-sprite.png': dragonSprite,
-  'witch.png': witchSprite,
-  'background-img.png': backgroundImg,
-};
-
 // --- Constants & Types ---
 const PROJECTILE_SPEED = 8;
 const MAX_LIVES = 3;
@@ -95,11 +84,21 @@ class SpriteManager {
     this.initSprites();
   }
 
+  private resolveAssetPath(asset: string) {
+    if (/^(https?:|data:)/.test(asset) || asset.startsWith('/')) {
+      return asset;
+    }
+    if (asset.startsWith('images/')) {
+      return `/${asset}`;
+    }
+    return `/images/${asset}`;
+  }
+
   loadLevelAssets(level: LevelConfig) {
-    // Resolve asset URLs from map
-    const playerSrc = ASSET_MAP[level.assets.player] || level.assets.player;
-    const bgSrc = ASSET_MAP[level.assets.background] || level.assets.background;
-    const enemySrc = ASSET_MAP[level.assets.enemy] || level.assets.enemy;
+    // Resolve asset URLs from theme config to the public directory.
+    const playerSrc = this.resolveAssetPath(level.assets.player);
+    const bgSrc = this.resolveAssetPath(level.assets.background);
+    const enemySrc = this.resolveAssetPath(level.assets.enemy);
 
     // Load Player Sprite/Spritesheet
     const img = new Image();
