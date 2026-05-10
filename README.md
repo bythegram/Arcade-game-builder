@@ -121,6 +121,14 @@ On push to `main`, the workflow:
 
 `vite.config.ts` uses `base: './'` to support relative asset paths for Pages hosting.
 
+## PWA Support
+
+The build includes Progressive Web App basics:
+
+- `public/manifest.webmanifest` for install metadata
+- `public/sw.js` for offline caching of core assets and visited same-origin resources
+- Service worker registration in `src/main.tsx` (production only)
+
 ## Notes on Environment Variables
 
 This game runs client-side as currently implemented and does not call Gemini APIs from `src/`.
